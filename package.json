@@ -1,0 +1,19 @@
+{
+  "name": "kristina-nuxt-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview"
+  },
+  "engines": {
+    "node": "^22.12.0 || ^24.11.0 || >=26.0.0"
+  },
+  "dependencies": {
+    "@nuxt/fonts": "^0.11.4",
+    "nuxt": "4.4.7"
+  },
+  "devDependencies": {}
+}
