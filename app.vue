@@ -2,6 +2,30 @@
 import { serviceBySlug } from '~/data/services'
 
 const route = useRoute()
+const mobileMenuOpen = ref(false)
+
+const closeMobileMenu = () => {
+  mobileMenuOpen.value = false
+}
+
+watch(
+  () => route.fullPath,
+  () => {
+    closeMobileMenu()
+  },
+)
+
+watch(mobileMenuOpen, (isOpen) => {
+  if (import.meta.client) {
+    document.body.classList.toggle('nav-open', isOpen)
+  }
+})
+
+onBeforeUnmount(() => {
+  if (import.meta.client) {
+    document.body.classList.remove('nav-open')
+  }
+})
 
 const activeService = computed(() => {
   if (!route.path.startsWith('/services/')) {
@@ -88,7 +112,49 @@ const closingCta = computed(() => {
       <NuxtLink to="/services/mindfulness-coaching">Mindfulness</NuxtLink>
       <NuxtLink to="/booking">Booking</NuxtLink>
     </nav>
+    <div class="mobile-header-actions" aria-label="Mobile quick actions">
+      <NuxtLink class="mobile-book-link" to="/booking">Book</NuxtLink>
+      <a class="mobile-call-link" href="tel:+447502500989" aria-label="Call Kristina Chulka">
+        <span aria-hidden="true">☎</span>
+      </a>
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-controls="mobile-menu"
+        :aria-expanded="mobileMenuOpen"
+        aria-label="Open navigation menu"
+        @click="mobileMenuOpen = true"
+      >
+        <span></span>
+        <span></span>
+      </button>
+    </div>
   </header>
+  <Transition name="mobile-menu">
+    <div v-if="mobileMenuOpen" id="mobile-menu" class="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation" @click.self="closeMobileMenu">
+      <aside class="mobile-menu__panel">
+        <div class="mobile-menu__top">
+          <NuxtLink class="site-logo" to="/" @click="closeMobileMenu">Kristina Chulka</NuxtLink>
+          <button class="menu-close" type="button" aria-label="Close navigation menu" @click="closeMobileMenu">
+            <span></span>
+            <span></span>
+          </button>
+        </div>
+        <nav class="mobile-menu__nav" aria-label="Mobile navigation links">
+          <NuxtLink to="/" @click="closeMobileMenu">Home</NuxtLink>
+          <NuxtLink to="/services" @click="closeMobileMenu">Services</NuxtLink>
+          <NuxtLink to="/services/family-constellations" @click="closeMobileMenu">Family Constellations</NuxtLink>
+          <NuxtLink to="/services/nlp-coaching" @click="closeMobileMenu">NLP Coaching</NuxtLink>
+          <NuxtLink to="/services/mindfulness-coaching" @click="closeMobileMenu">Mindfulness Coaching</NuxtLink>
+          <NuxtLink to="/booking" @click="closeMobileMenu">Booking</NuxtLink>
+        </nav>
+        <div class="mobile-menu__actions">
+          <NuxtLink class="button button--light" to="/booking" @click="closeMobileMenu">Book consultation</NuxtLink>
+          <a class="mobile-menu__call" href="tel:+447502500989">Call +44 75 0250 0989</a>
+        </div>
+      </aside>
+    </div>
+  </Transition>
   <NuxtPage />
   <SiteFooter v-bind="closingCta" />
 </template>
