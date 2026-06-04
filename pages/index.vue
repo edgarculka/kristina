@@ -340,13 +340,13 @@ const socialImages = [
           <NuxtLink class="text-link" to="/booking">Or book an initial consultation</NuxtLink>
         </form>
       </div>
-      <footer class="footer">
+      <aside class="contact-panel">
         <p class="asterisk">*</p>
         <h2>Contacts</h2>
         <p><strong>Email:</strong> <a href="mailto:Kristina.culka@gmail.com">Kristina.culka@gmail.com</a></p>
         <p><strong>Phone:</strong> <a href="tel:+447502500989">+44 75 0250 0989</a></p>
         <NuxtLink class="button button--light" to="/booking">Book a Consultation</NuxtLink>
-      </footer>
+      </aside>
     </section>
   </main>
 </template>

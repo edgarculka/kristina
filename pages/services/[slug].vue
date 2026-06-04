@@ -74,12 +74,6 @@ useHead(() => ({
         <li v-for="outcome in service.outcomes" :key="outcome">{{ outcome }}</li>
       </ul>
     </section>
-
-    <section class="service-booking-band">
-      <h2>Ready to choose the right format?</h2>
-      <p>Start with an initial consultation so the request, service direction, and next step are clear.</p>
-      <NuxtLink class="button button--light" :to="`/booking?service=${service.slug}`">Book consultation</NuxtLink>
-    </section>
   </main>
 
   <main v-else>

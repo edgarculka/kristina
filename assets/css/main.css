@@ -1219,6 +1219,7 @@ textarea {
 }
 
 .contact__form,
+.contact-panel,
 .footer {
   padding: clamp(1.5rem, 4vw, 3rem);
   border-radius: var(--radius);
@@ -1230,6 +1231,14 @@ textarea {
 
 .contact__form h2 {
   color: var(--rust);
+}
+
+.contact-panel {
+  display: grid;
+  align-content: center;
+  gap: 1rem;
+  background: var(--rust);
+  color: var(--paper);
 }
 
 form {
@@ -1260,20 +1269,98 @@ textarea {
   resize: vertical;
 }
 
-.footer {
+.site-closing {
   display: grid;
-  align-content: center;
-  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 420px);
+  gap: clamp(1rem, 4vw, 2rem);
+  align-items: end;
+  padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 2rem);
   background: var(--rust);
   color: var(--paper);
 }
 
-.footer .asterisk {
+.site-closing__copy {
+  display: grid;
+  gap: 1rem;
+  max-width: 52rem;
+}
+
+.site-closing h2 {
+  color: var(--paper);
+  font-size: clamp(2.6rem, 6vw, 5.6rem);
+}
+
+.site-closing p:not(.eyebrow) {
+  max-width: 42rem;
+  color: rgba(234, 231, 224, 0.82);
+}
+
+.site-closing__actions {
+  display: grid;
+  justify-items: start;
+  gap: 1rem;
+}
+
+.footer,
+.site-footer {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(220px, 0.8fr) minmax(220px, 0.7fr);
+  gap: clamp(1.2rem, 4vw, 3rem);
+  align-items: start;
+  border-radius: 0;
+  background: var(--rust-dark);
+  color: var(--paper);
+}
+
+.footer .asterisk,
+.contact-panel .asterisk {
   color: var(--paper-deep);
 }
 
-.footer .button {
+.footer .button,
+.contact-panel .button {
   width: fit-content;
+}
+
+.site-footer {
+  border-top: 1px solid rgba(234, 231, 224, 0.2);
+}
+
+.site-footer__brand {
+  display: inline-block;
+  margin-bottom: 1rem;
+  font-family: Cormorant, Georgia, serif;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  line-height: 0.95;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.site-footer p,
+.site-footer a {
+  color: rgba(234, 231, 224, 0.82);
+}
+
+.site-footer__nav,
+.site-footer__contact {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.site-footer__nav a,
+.site-footer__contact a {
+  width: fit-content;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.site-footer__nav a:hover,
+.site-footer__contact a:hover,
+.site-footer__brand:hover {
+  color: var(--paper);
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
 }
 
 @media (max-width: 900px) {
@@ -1346,6 +1433,11 @@ textarea {
   }
 
   .service-booking-band {
+    grid-template-columns: 1fr;
+  }
+
+  .site-closing,
+  .site-footer {
     grid-template-columns: 1fr;
   }
 
@@ -1484,6 +1576,7 @@ textarea {
   .snapshot-card,
   .booking-card,
   .contact__form,
+  .contact-panel,
   .footer {
     width: 100%;
     max-width: 100%;
@@ -1679,6 +1772,31 @@ textarea {
   .booking-card--image img {
     height: 320px;
     aspect-ratio: auto;
+  }
+
+  .site-closing {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    padding: 2.4rem 0.875rem;
+  }
+
+  .site-closing h2 {
+    font-size: clamp(2rem, 10vw, 3.2rem);
+    line-height: 0.98;
+  }
+
+  .site-closing__actions,
+  .site-closing__actions .button {
+    width: 100%;
+  }
+
+  .site-footer {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 1.5rem 0.875rem;
+  }
+
+  .site-footer__brand {
+    font-size: 2rem;
   }
 
   .social__images img {
