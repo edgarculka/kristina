@@ -63,8 +63,7 @@ const wizardSteps = [
   'Service',
   'Dates',
   'Slot',
-  'Guest',
-  'Phone, email',
+  'Contact details',
   'Notes',
   'Review',
 ]
@@ -169,11 +168,11 @@ const currentStepIsComplete = computed(() => {
   }
 
   if (currentStep.value === 3) {
-    return form.name.trim().length > 1
-  }
-
-  if (currentStep.value === 4) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim()) && form.phone.trim().length > 5
+    return (
+      form.name.trim().length > 1
+      && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())
+      && form.phone.trim().length > 5
+    )
   }
 
   return true
@@ -330,27 +329,26 @@ useHead({
             </section>
 
             <section v-show="currentStep === 3" class="booking-question">
-              <label>
-                <span>Who is the session for?</span>
-                <small>Use the name Kristina should address in her reply.</small>
-                <input v-model="form.name" type="text" name="name" autocomplete="name" placeholder="Full name" />
-              </label>
+              <div class="booking-contact-fields">
+                <label>
+                  <span>Your name</span>
+                  <small>Use the name Kristina should address in her reply.</small>
+                  <input v-model="form.name" type="text" name="name" autocomplete="name" placeholder="Full name" />
+                </label>
+                <label>
+                  <span>Email</span>
+                  <small>Your email is only used to arrange this booking.</small>
+                  <input v-model="form.email" type="email" name="email" autocomplete="email" placeholder="you@example.com" />
+                </label>
+                <label>
+                  <span>Phone number</span>
+                  <small>Use the number Kristina should use if a quick confirmation is needed.</small>
+                  <input v-model="form.phone" type="tel" name="phone" autocomplete="tel" placeholder="+44 7000 000000" />
+                </label>
+              </div>
             </section>
 
             <section v-show="currentStep === 4" class="booking-question">
-              <label>
-                <span>Where should Kristina reply?</span>
-                <small>Your phone and email are only used to arrange this booking.</small>
-                <input v-model="form.email" type="email" name="email" autocomplete="email" placeholder="you@example.com" />
-              </label>
-              <label>
-                <span>Phone number</span>
-                <small>Use the number Kristina should use if a quick confirmation is needed.</small>
-                <input v-model="form.phone" type="tel" name="phone" autocomplete="tel" placeholder="+44 7000 000000" />
-              </label>
-            </section>
-
-            <section v-show="currentStep === 5" class="booking-question">
               <label>
                 <span>What would you like to explore?</span>
                 <small>A short note is enough. You can keep it simple.</small>
@@ -358,7 +356,7 @@ useHead({
               </label>
             </section>
 
-            <section v-show="currentStep === 6" class="booking-question">
+            <section v-show="currentStep === 5" class="booking-question">
               <p class="eyebrow">Review request</p>
               <h2>Send this booking request?</h2>
               <div class="booking-summary" aria-live="polite">
@@ -392,7 +390,7 @@ useHead({
                 <dd>{{ selectedTimeLabel }}</dd>
               </div>
               <div>
-                <dt>Guest</dt>
+                <dt>Contact</dt>
                 <dd>{{ selectedGuestLabel }}</dd>
               </div>
               <div>
