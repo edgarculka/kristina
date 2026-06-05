@@ -1,6 +1,6 @@
 export default defineNuxtConfig({
   compatibilityDate: '2026-06-04',
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   nitro: {
     preset: 'static',
   },
@@ -9,12 +9,12 @@ export default defineNuxtConfig({
   app: {
     baseURL: process.env.NUXT_APP_BASE_URL || '/',
     head: {
-      title: 'Kristina Chulka | Systemic Constellations and Life Coaching',
+      title: 'Kristina Culka | Systemic Constellations and Life Coaching',
       meta: [
         {
           name: 'description',
           content:
-            'Private family constellations, NLP coaching, and mindfulness coaching with Kristina Chulka in London.',
+            'Private family constellations, NLP coaching, and mindfulness coaching with Kristina Culka in London.',
         },
       ],
       htmlAttrs: {

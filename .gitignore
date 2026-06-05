@@ -2,6 +2,7 @@
 .output
 dist
 node_modules
+.nuxt-dev.log
 .env
 .env.*
 !.env.example

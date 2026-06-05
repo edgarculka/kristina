@@ -1,4 +1,4 @@
-# Kristina Chulka Nuxt Site
+# Kristina Culka Nuxt Site
 
 Static Nuxt 4 migration of `https://ovarvara.tilda.ws`, translated into English and structured for future service-list expansion.
 

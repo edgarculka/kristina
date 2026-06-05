@@ -5,11 +5,11 @@ const route = useRoute()
 const service = computed(() => serviceBySlug[String(route.params.slug)])
 
 useHead(() => ({
-  title: service.value ? `${service.value.title} | Kristina Chulka` : 'Service | Kristina Chulka',
+  title: service.value ? `${service.value.title} | Kristina Culka` : 'Service | Kristina Culka',
   meta: [
     {
       name: 'description',
-      content: service.value?.summary ?? 'Private coaching and systemic work with Kristina Chulka.',
+      content: service.value?.summary ?? 'Private coaching and systemic work with Kristina Culka.',
     },
   ],
 }))
@@ -47,7 +47,7 @@ useHead(() => ({
     <section class="section service-page service-page--editorial">
       <div class="service-page__intro">
         <p class="asterisk">*</p>
-        <h2>How this work helps</h2>
+        <h2>Best fit</h2>
         <p>{{ service.intro }}</p>
         <ul class="chip-list">
           <li v-for="item in service.idealFor" :key="item">{{ item }}</li>
@@ -67,9 +67,12 @@ useHead(() => ({
     <section class="section outcomes outcomes--visual">
       <div>
         <p class="asterisk">*</p>
-        <h2>Expected direction</h2>
+        <h2>What changes</h2>
         <p>{{ service.closing }}</p>
       </div>
+      <figure class="outcomes__image">
+        <img src="/images/generated/kristina-outcomes-clarity.png" alt="Kristina Culka and a client in a calm reflective moment after a private session" />
+      </figure>
       <ul>
         <li v-for="outcome in service.outcomes" :key="outcome">{{ outcome }}</li>
       </ul>

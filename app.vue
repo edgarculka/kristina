@@ -36,12 +36,14 @@ const activeService = computed(() => {
   return slug ? serviceBySlug[slug] ?? null : null
 })
 
+const isBookingRoute = computed(() => route.path === '/booking')
+
 const closingCta = computed(() => {
   if (activeService.value) {
     return {
       eyebrow: activeService.value.eyebrow,
       title: `Ready for ${activeService.value.shortTitle}?`,
-      copy: 'Book a first consultation so the request, service direction, and next step are clear before deeper work begins.',
+      copy: 'Book the full service directly, or choose a short consultation if you want to confirm the fit first.',
       primary: {
         label: 'Book this service',
         to: `/booking?service=${activeService.value.slug}`,
@@ -57,7 +59,7 @@ const closingCta = computed(() => {
     return {
       eyebrow: 'Next step',
       title: 'Ready to choose the right format?',
-      copy: 'Start with an initial consultation if you want help choosing between systemic work, NLP coaching, and mindfulness coaching.',
+      copy: 'Book a specific service directly, or use the short consultation to choose between systemic work, NLP coaching, and mindfulness.',
       primary: {
         label: 'Book initial consultation',
         to: '/booking',
@@ -73,7 +75,7 @@ const closingCta = computed(() => {
     return {
       eyebrow: 'Before you send',
       title: 'Not sure which service to choose?',
-      copy: 'You can still request an initial consultation. Kristina will confirm the format personally after reviewing the request.',
+      copy: 'Request a consultation. Kristina will confirm the right format personally.',
       primary: {
         label: 'View services',
         to: '/services',
@@ -88,7 +90,7 @@ const closingCta = computed(() => {
   return {
     eyebrow: 'Begin here',
     title: 'Ready to find the right support?',
-    copy: 'Explore the service directions or book an initial consultation to clarify the request and choose the right format.',
+    copy: 'Compare the services or book a consultation to choose the right format.',
     primary: {
       label: 'Book consultation',
       to: '/booking',
@@ -102,19 +104,23 @@ const closingCta = computed(() => {
 </script>
 
 <template>
-  <header class="site-header">
-    <NuxtLink class="site-logo" to="/">Kristina Chulka</NuxtLink>
+  <header v-if="!isBookingRoute" class="site-header">
+    <NuxtLink class="site-logo" to="/">Kristina Culka</NuxtLink>
     <nav class="site-nav" aria-label="Main navigation">
       <NuxtLink to="/">Home</NuxtLink>
       <NuxtLink to="/services">Services</NuxtLink>
-      <NuxtLink to="/services/family-constellations">Family Constellations</NuxtLink>
-      <NuxtLink to="/services/nlp-coaching">NLP</NuxtLink>
+      <NuxtLink to="/services/family-constellations">Family constellations</NuxtLink>
+      <NuxtLink to="/services/nlp-coaching">NLP coaching</NuxtLink>
       <NuxtLink to="/services/mindfulness-coaching">Mindfulness</NuxtLink>
       <NuxtLink to="/booking">Booking</NuxtLink>
     </nav>
+    <div class="desktop-header-actions" aria-label="Quick actions">
+      <a class="header-call-link" href="tel:+447502500989">Call</a>
+      <NuxtLink class="header-book-link" to="/booking">Book consultation</NuxtLink>
+    </div>
     <div class="mobile-header-actions" aria-label="Mobile quick actions">
       <NuxtLink class="mobile-book-link" to="/booking">Book</NuxtLink>
-      <a class="mobile-call-link" href="tel:+447502500989" aria-label="Call Kristina Chulka">
+      <a class="mobile-call-link" href="tel:+447502500989" aria-label="Call Kristina Culka">
         <span aria-hidden="true">☎</span>
       </a>
       <button
@@ -134,7 +140,7 @@ const closingCta = computed(() => {
     <div v-if="mobileMenuOpen" id="mobile-menu" class="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation" @click.self="closeMobileMenu">
       <aside class="mobile-menu__panel">
         <div class="mobile-menu__top">
-          <NuxtLink class="site-logo" to="/" @click="closeMobileMenu">Kristina Chulka</NuxtLink>
+          <NuxtLink class="site-logo" to="/" @click="closeMobileMenu">Kristina Culka</NuxtLink>
           <button class="menu-close" type="button" aria-label="Close navigation menu" @click="closeMobileMenu">
             <span></span>
             <span></span>
@@ -143,9 +149,9 @@ const closingCta = computed(() => {
         <nav class="mobile-menu__nav" aria-label="Mobile navigation links">
           <NuxtLink to="/" @click="closeMobileMenu">Home</NuxtLink>
           <NuxtLink to="/services" @click="closeMobileMenu">Services</NuxtLink>
-          <NuxtLink to="/services/family-constellations" @click="closeMobileMenu">Family Constellations</NuxtLink>
-          <NuxtLink to="/services/nlp-coaching" @click="closeMobileMenu">NLP Coaching</NuxtLink>
-          <NuxtLink to="/services/mindfulness-coaching" @click="closeMobileMenu">Mindfulness Coaching</NuxtLink>
+          <NuxtLink to="/services/family-constellations" @click="closeMobileMenu">Family constellations</NuxtLink>
+          <NuxtLink to="/services/nlp-coaching" @click="closeMobileMenu">NLP coaching</NuxtLink>
+          <NuxtLink to="/services/mindfulness-coaching" @click="closeMobileMenu">Mindfulness coaching</NuxtLink>
           <NuxtLink to="/booking" @click="closeMobileMenu">Booking</NuxtLink>
         </nav>
         <div class="mobile-menu__actions">
@@ -156,5 +162,5 @@ const closingCta = computed(() => {
     </div>
   </Transition>
   <NuxtPage />
-  <SiteFooter v-bind="closingCta" />
+  <SiteFooter v-if="!isBookingRoute" v-bind="closingCta" />
 </template>

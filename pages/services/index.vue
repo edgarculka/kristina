@@ -2,12 +2,12 @@
 import { services } from '~/data/services'
 
 useHead({
-  title: 'Services | Kristina Chulka',
+  title: 'Services | Kristina Culka',
   meta: [
     {
       name: 'description',
       content:
-        'Explore family constellations, NLP coaching, and mindfulness coaching with Kristina Chulka.',
+        'Explore family constellations, NLP coaching, and mindfulness coaching with Kristina Culka.',
     },
   ],
 })
@@ -20,12 +20,12 @@ useHead({
         <p class="eyebrow">Services</p>
         <h1>Choose the right format</h1>
         <p>
-          The practice is structured around three clear directions. Family and systemic constellations remain the main service, with NLP and mindfulness coaching available as focused supporting formats.
+          Three private formats. Start with the request, then choose the depth and pace that fits.
         </p>
         <NuxtLink class="button button--light" to="/booking">Book an initial consultation</NuxtLink>
       </div>
       <div class="services-hero__image">
-        <img src="/images/tild6138-3134-4634-b339-656630343033-u6642599252_httpssmj.png" alt="London street with Union Jack flags" />
+        <img src="/images/generated/kristina-online-session.png" alt="Kristina Culka providing an online coaching session from a warm private practice room" />
       </div>
     </section>
 
@@ -42,6 +42,10 @@ useHead({
         <span>003.</span>
         <p>Move toward clarity that can be used in real life.</p>
       </article>
+      <figure class="service-rhythm__visual">
+        <img src="/images/generated/kristina-online-session.png" alt="Kristina Culka providing an online coaching session with a laptop, notebook, and constellation figures" />
+        <figcaption>Available in London and online.</figcaption>
+      </figure>
     </section>
 
     <section class="section service-directory">
@@ -52,7 +56,7 @@ useHead({
         <div class="directory-card__body">
           <span>{{ service.eyebrow }}</span>
           <h2>{{ service.title }}</h2>
-          <p>{{ service.summary }}</p>
+          <p>{{ service.promise }}</p>
           <div class="directory-card__meta">
             <strong>{{ service.price }}</strong>
             <span>{{ service.duration }}</span>
@@ -60,7 +64,7 @@ useHead({
           <ul>
             <li v-for="detail in service.details" :key="detail">{{ detail }}</li>
           </ul>
-          <NuxtLink class="button" :to="`/services/${service.slug}`">Open service</NuxtLink>
+          <NuxtLink class="button" :to="`/services/${service.slug}`">View details</NuxtLink>
         </div>
       </article>
     </section>

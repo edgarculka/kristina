@@ -32,15 +32,15 @@ defineProps<{
 
   <footer class="footer site-footer">
     <div>
-      <NuxtLink class="site-footer__brand" to="/">Kristina Chulka</NuxtLink>
+      <NuxtLink class="site-footer__brand" to="/">Kristina Culka</NuxtLink>
       <p>Private family constellations, NLP coaching, and mindfulness coaching in London and online.</p>
     </div>
 
     <nav class="site-footer__nav" aria-label="Footer navigation">
       <NuxtLink to="/services">Services</NuxtLink>
-      <NuxtLink to="/services/family-constellations">Family Constellations</NuxtLink>
-      <NuxtLink to="/services/nlp-coaching">NLP Coaching</NuxtLink>
-      <NuxtLink to="/services/mindfulness-coaching">Mindfulness Coaching</NuxtLink>
+      <NuxtLink to="/services/family-constellations">Family constellations</NuxtLink>
+      <NuxtLink to="/services/nlp-coaching">NLP coaching</NuxtLink>
+      <NuxtLink to="/services/mindfulness-coaching">Mindfulness coaching</NuxtLink>
       <NuxtLink to="/booking">Booking</NuxtLink>
     </nav>
 

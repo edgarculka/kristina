@@ -23,10 +23,12 @@ export type ServiceItem = {
 }
 
 export const initialConsultation = {
+  slug: 'consultation',
   title: 'Initial consultation',
-  price: '£90',
-  duration: '60 minutes',
-  note: 'A focused first meeting to clarify the request, choose the right format, and define the next step.',
+  shortTitle: 'Consultation',
+  price: '£50',
+  duration: '30 minutes',
+  note: 'A shorter, lower-cost first meeting to clarify the request and choose the right format.',
 }
 
 export const bookingTimes = ['10:00', '12:00', '14:00', '16:00', '18:00']
@@ -35,12 +37,12 @@ export const services: ServiceItem[] = [
   {
     slug: 'family-constellations',
     eyebrow: 'Main service',
-    title: 'Family and Systemic Constellations',
-    shortTitle: 'Family Constellations',
+    title: 'Family and systemic constellations',
+    shortTitle: 'Family constellations',
     summary:
-      'Deep systemic work for family patterns, money scenarios, business pressure, relationships, and recurring life situations that cannot be solved by logic alone.',
+      'Deep systemic work for family patterns, money, relationships, and recurring situations.',
     intro:
-      'Family constellations remain the central service of this practice. This work helps reveal hidden inner, family, and systemic dynamics that can influence relationships, financial choices, business scale, stability, and the feeling of support.',
+      'The central service for seeing hidden family, money, relationship, or business dynamics clearly.',
     price: 'From £180',
     duration: '90-120 minutes',
     idealFor: [
@@ -53,25 +55,25 @@ export const services: ServiceItem[] = [
       {
         title: 'Individual systemic constellations for entrepreneurs',
         items: [
-          'reaching a financial ceiling',
-          'facing repeated scenarios in business',
-          'feeling inner tension despite external success',
-          'standing at the point of an important decision or transition',
+          'financial ceiling',
+          'repeated business scenarios',
+          'inner tension despite success',
+          'important decisions or transitions',
         ],
       },
       {
         title: 'Money and family-system scenarios',
         items: [
-          'loyalty to family stories',
+          'family money stories',
           'fear of success or growth',
-          'unconscious prohibitions around income',
-          'inner conflicts between safety and scale',
-          'restoring the feeling of the right to income and stability',
+          'income blocks',
+          'safety versus scale',
+          'right to income and stability',
         ],
       },
       {
         title: 'Personal crises and growth points',
-        items: ['pausing safely', 'hearing yourself', 'building inner support', 'finding a clear direction of movement'],
+        items: ['pause safely', 'hear yourself', 'build inner support', 'find a clear direction'],
       },
     ],
     outcomes: [
@@ -81,21 +83,21 @@ export const services: ServiceItem[] = [
       'a calmer internal position from which to act',
     ],
     closing:
-      'A constellation brings clarity, aligns the inner system, and allows decisions to be made from a calm, stable state instead of pressure or fear.',
-    image: '/images/tild6135-3161-4062-b534-616330336562-photo_59272160547676.jpg',
-    imageAlt: 'Kristina Chulka in a library setting',
+      'A constellation supports calmer decisions by making the hidden structure visible.',
+    image: '/images/generated/kristina-family-constellations.png',
+    imageAlt: 'Kristina Culka guiding a private systemic constellation session with wooden figures on a consultation table',
     promise: 'A quiet space to see what has been influencing the system underneath the visible problem.',
     details: ['Private 1:1 format', 'Systemic lens', 'Deep request work'],
   },
   {
     slug: 'nlp-coaching',
     eyebrow: 'Coaching',
-    title: 'NLP Coaching',
-    shortTitle: 'NLP Coaching',
+    title: 'NLP coaching',
+    shortTitle: 'NLP coaching',
     summary:
-      'Neuro linguistic programming tools for confidence, clear thinking, focus, emotional regulation, and releasing limiting beliefs.',
+      'Practical tools for confidence, clear thinking, focus, and emotional regulation.',
     intro:
-      'NLP coaching brings practical structure to the way thoughts, language, emotions, and embodied responses shape daily choices. The work is focused, applied, and oriented toward internal clarity that can be used in real situations.',
+      'Focused coaching for thoughts, language, emotions, and everyday responses.',
     price: 'From £120',
     duration: '75 minutes',
     idealFor: [
@@ -108,22 +110,22 @@ export const services: ServiceItem[] = [
       {
         title: 'Neuro linguistic programming',
         items: [
-          'working with the connection between language, perception, and behaviour',
-          'creating new inner responses to familiar situations',
-          'building practical tools for self-regulation and choice',
+          'language and perception',
+          'new responses to familiar situations',
+          'self-regulation tools',
         ],
       },
       {
         title: 'Confidence',
-        items: ['public speaking', 'body and mind confidence', 'being seen without losing inner ground'],
+        items: ['public speaking', 'body confidence', 'being seen calmly'],
       },
       {
         title: 'Clear mind',
-        items: ['focus on what matters', 'easing panic attacks and panic responses', 'reducing mental noise'],
+        items: ['focus', 'panic responses', 'mental noise'],
       },
       {
         title: 'Unblock limitations',
-        items: ['limiting beliefs', 'inner permissions', 'recovering from difficult life situations'],
+        items: ['limiting beliefs', 'inner permission', 'recovery after difficulty'],
       },
     ],
     outcomes: [
@@ -133,21 +135,21 @@ export const services: ServiceItem[] = [
       'movement beyond old limiting beliefs',
     ],
     closing:
-      'This format supports people who need practical tools for confidence, calm decision-making, and movement beyond old limitations.',
-    image: '/images/tild3233-3233-4563-a130-323032383062-noroot.png',
-    imageAlt: 'Kristina Chulka outside The Law Society in London',
+      'This format is practical: confidence, regulation, and movement beyond old limits.',
+    image: '/images/generated/kristina-nlp-coaching.png',
+    imageAlt: 'Kristina Culka providing private NLP coaching with a notebook and coaching cards',
     promise: 'Practical tools for confidence, attention, and new inner responses in real situations.',
     details: ['Applied coaching', 'Confidence work', 'Clear-mind tools'],
   },
   {
     slug: 'mindfulness-coaching',
     eyebrow: 'Mindful living',
-    title: 'Mindfulness Coaching',
+    title: 'Mindfulness coaching',
     shortTitle: 'Mindfulness',
     summary:
-      'A grounded introduction to mindful living through body awareness, meditation, calm focus, relationship quality, purpose, goals, and art therapy.',
+      'Mindful living through body awareness, meditation, calm focus, goals, and creative tools.',
     intro:
-      'Mindfulness coaching creates a steady bridge between the body, emotions, attention, relationships, and everyday choices. It is gentle, practical work for people who want to live with more calm, presence, and direction.',
+      'Gentle practical work for more calm, presence, body awareness, and direction.',
     price: 'From £110',
     duration: '75 minutes',
     idealFor: [
@@ -160,19 +162,19 @@ export const services: ServiceItem[] = [
     groups: [
       {
         title: 'Introduction to mindful living',
-        items: ['listening to the body', 'staying calm and focused', 'improving relationships'],
+        items: ['body listening', 'calm focus', 'relationship quality'],
       },
       {
         title: 'Meditation',
-        items: ['simple meditation practice', 'attention training', 'returning to presence through the body'],
+        items: ['simple practice', 'attention training', 'return to presence'],
       },
       {
         title: 'Purpose and goals',
-        items: ['clarifying what matters now', 'aligning goals with inner state', 'choosing sustainable next steps'],
+        items: ['what matters now', 'aligned goals', 'sustainable next steps'],
       },
       {
         title: 'Art therapy',
-        items: ['creative expression', 'soft access to feelings and meaning', 'integrating insight through image and form'],
+        items: ['creative expression', 'feelings and meaning', 'image and form'],
       },
     ],
     outcomes: [
@@ -182,9 +184,9 @@ export const services: ServiceItem[] = [
       'creative ways to process meaning and feeling',
     ],
     closing:
-      'This format is especially useful when a person needs softness, structure, and a calmer relationship with themselves.',
-    image: '/images/tild3831-3130-4963-a336-613462306338-noroot.png',
-    imageAlt: 'Supportive moment during social and personal development work',
+      'This format gives softness, structure, and a calmer relationship with yourself.',
+    image: '/images/generated/kristina-mindfulness-coaching.png',
+    imageAlt: 'Kristina Culka guiding a private mindfulness coaching session in a calm room',
     promise: 'Gentle structure for returning to the body, calming the mind, and choosing aligned next steps.',
     details: ['Mindful living', 'Meditation', 'Creative integration'],
   },

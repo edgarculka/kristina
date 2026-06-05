@@ -1,26 +1,71 @@
 <script setup lang="ts">
 import { services } from '~/data/services'
 
+const activeHeroServiceSlug = ref(services[0]?.slug ?? '')
+const activeHeroService = computed(() => services.find((service) => service.slug === activeHeroServiceSlug.value) ?? services[0])
+
+const setHeroService = (slug: string) => {
+  activeHeroServiceSlug.value = slug
+}
+
+const setHeroServiceByIndex = (index: number) => {
+  const nextService = services[index]
+
+  if (nextService) {
+    activeHeroServiceSlug.value = nextService.slug
+  }
+}
+
+const handleHeroServiceKeydown = (event: KeyboardEvent, index: number) => {
+  const keys = ['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp', 'Home', 'End']
+
+  if (!keys.includes(event.key)) {
+    return
+  }
+
+  event.preventDefault()
+
+  const lastIndex = services.length - 1
+  const nextIndexMap: Record<string, number> = {
+    ArrowRight: index === lastIndex ? 0 : index + 1,
+    ArrowDown: index === lastIndex ? 0 : index + 1,
+    ArrowLeft: index === 0 ? lastIndex : index - 1,
+    ArrowUp: index === 0 ? lastIndex : index - 1,
+    Home: 0,
+    End: lastIndex,
+  }
+  const nextIndex = nextIndexMap[event.key]
+
+  setHeroServiceByIndex(nextIndex)
+
+  const tabList = event.currentTarget instanceof HTMLElement ? event.currentTarget.parentElement : null
+  const nextTab = tabList?.children[nextIndex]
+
+  if (nextTab instanceof HTMLElement) {
+    nextTab.focus()
+  }
+}
+
 const approachPillars = [
   {
     title: 'Work',
     copy:
-      'I do not take the position of an expert in someone else\'s life, and I do not offer ready-made answers or decisions. My role is to stay close in the places where clarity, honesty, and the capacity to face reality are needed.',
+      'No ready-made answers. The work stays close to what is real, clear, and usable.',
   },
   {
     title: 'People',
     copy:
-      'I work with both men and women, understanding that each person has their own path toward inner clarity and stability. A separate part of my practice is leadership work with teenagers in London, where I see confidence, relationships, and quality of life change in real time.',
+      'Private work with adults, plus leadership projects for teenagers in London.',
   },
   {
     title: 'Ethics',
     copy:
-      'I do not lean on formal status or accreditation. Personal responsibility, professional ethics, and respect for people\'s destinies matter more to me. My work is built on honesty, depth, and attention to the client\'s reality.',
+      'Honesty, confidentiality, and respect for each person\'s responsibility.',
   },
   {
     title: 'Path',
     copy:
-      'My introduction to systemic constellations happened more than 13 years ago through personal experience and questions that could not be answered superficially. This path formed not from curiosity about a method, but from the need to understand deeply how a person\'s inner processes and life are arranged.',
+      'More than 13 years of systemic practice, formed through personal experience and study.',
   },
 ]
 
@@ -28,26 +73,26 @@ const methodCards = [
   {
     title: 'What is systemic work?',
     copy:
-      'Family and systemic constellations help reveal hidden connections and conflicts that shape decisions, relationships, money, and life patterns. This is not magic and not therapy. It is work with reality: with what already exists in the system, even when it is not directly conscious.',
+      'Hidden patterns behind relationships, money, decisions, and repeated life situations.',
   },
   {
-    title: 'How does it work?',
+    title: 'How it works',
     copy:
-      'The work makes it possible to see the structure of a situation: sources of tension, loss of energy, and systemic distortions that limit movement forward. It is not about fixing a person, but about clarification and restoring inner order.',
+      'The session clarifies the structure of a situation, then restores a calmer inner position.',
   },
   {
-    title: 'My approach',
+    title: 'What it is not',
     copy:
-      'I work carefully, deeply, and confidentially. There is no rescuing, pressure, or attempt to decide for the client. My task is to create a space where precise solutions can appear and be applied in real life.',
+      'No rescuing, pressure, or decisions made for you. The work supports clear choice.',
   },
 ]
 
 const reasons = [
-  'This is a deep and confidential private practice, not a high-volume format.',
-  'The work is especially relevant during growth, scaling, and transitions, when familiar solutions stop working.',
-  'I work with entrepreneurs and leaders who carry a high level of responsibility.',
-  'Inner shifts here are directly reflected in financial decisions, income, and strategy.',
-  'The focus is the personal sphere, where clarity, inner support, and stability are formed.',
+  'Private, confidential, and low-volume',
+  'Useful during growth, pressure, and transitions',
+  'Strong fit for leaders and entrepreneurs',
+  'Connects inner clarity with decisions and scale',
+  'Focused on stability, support, and responsibility',
 ]
 
 const audienceGroups = [
@@ -76,49 +121,60 @@ const testimonials = [
   {
     quote: 'I felt peace, clarity, and belonging.',
     text:
-      'This work helped me feel love toward people and toward myself. I gained inner peace, clear direction, and a deep understanding of acceptance. This state continues to support me and opens the possibility of sharing love with others.',
+      'A calmer state, clearer direction, and a deeper feeling of acceptance.',
   },
   {
     quote: 'This session changed my life far beyond words.',
     text:
-      'Kristina\'s family constellation session helped me gently heal deep ancestral wounds and release long-standing unhealthy patterns. I experienced a profound inner shift, greater clarity, and renewed hope. The healing from this work continues to support me, allowing positive change not only in my life, but also for future generations.',
+      'A profound inner shift with renewed hope and a sense of release.',
   },
   {
     quote: 'It was a strange, deep, and very important inner state.',
     text:
-      'After the session I was in an unusual, very deep state. The process was powerful and transforming, with a sense of inner movement and realizations that continue to unfold over time.',
+      'A powerful session with realizations that continued to unfold afterward.',
   },
   {
     quote: 'After the session, everything came together in the best possible way.',
     text:
-      'Working with Kristina gave me surprisingly precise understanding of my state. After the session, my test results normalized and the following processes unfolded as favorably as possible. I feel well now and gratefully note her professionalism and support.',
+      'Precise understanding, relief, and a feeling that the next steps aligned.',
   },
   {
     quote: 'She constantly reminds me of my worth and brings my mind to peace.',
     text:
-      'Kristina\'s guidance has helped me reconnect with my self-worth and feel emotionally supported. Through our work, I learned to set healthy boundaries, release unnecessary responsibility for others, and find inner calm. My mind feels clearer, lighter, and more at ease.',
+      'More self-worth, healthier boundaries, and a quieter mind.',
   },
   {
     quote: 'What used to seem impossible became reality.',
     text:
-      'After working with Kristina, I managed to close more than 40% of a major debt. Banks offered favorable terms, and new clients and projects arrived. Money flows aligned in the most favorable way. The result exceeded all expectations.',
+      'A real-world financial shift that exceeded expectations.',
   },
   {
     quote: 'I did not expect this effect.',
     text:
-      'I was skeptical about this kind of help, but communicating with Kristina turned out to be easy, interesting, and inspiring. After the meeting I had more energy and determination to take a step forward. I look forward to continuing the work and recommend it to those who are in a difficult inner state.',
+      'More energy, determination, and readiness to take the next step.',
   },
   {
     quote: 'It was incredible and very precise.',
     text:
-      'After the session I was in a strong emotional state: tears, goosebumps, and the full feeling that something very important had been touched. I was amazed by how precisely states and themes were read, including things only I knew. This work helped me understand a great deal and put things in their place.',
+      'A precise session that helped put important things in their place.',
   },
 ]
 
+const featuredTestimonials = testimonials.slice(0, 4)
+
+const sectionImages = {
+  hero: '/images/generated/kristina-hero-consultation.png',
+  approach: '/images/tild3233-3233-4563-a130-323032383062-noroot.png',
+  method: '/images/generated/kristina-family-constellations.png',
+  presence: '/images/tild6135-3161-4062-b534-616330336562-photo_59272160547676.jpg',
+  audience: '/images/generated/kristina-nlp-coaching.png',
+  shifts: '/images/generated/kristina-outcomes-clarity.png',
+}
+
 const socialImages = [
+  '/images/generated/social-teen-leadership.png',
   '/images/tild6466-6339-4638-a265-353239333034-noroot.png',
   '/images/tild6466-3862-4431-b932-356264333062-Group_65.png',
-  '/images/tild3831-3130-4963-a336-613462306338-noroot.png',
   '/images/tild3566-3862-4538-b636-396363663864-photo_57848855458623.jpg',
 ]
 </script>
@@ -128,38 +184,92 @@ const socialImages = [
     <section class="hero section">
       <div class="hero__content">
         <p class="hero__kicker">Private coaching and systemic work</p>
-        <h1>Family constellations, NLP and mindfulness coaching</h1>
-        <p class="hero__statement">Private 1:1 sessions with Kristina Chulka for clarity, confidence, calm focus and life transitions.</p>
-        <div class="hero__actions">
-          <NuxtLink class="button" to="/booking">Book initial consultation · £90</NuxtLink>
-          <NuxtLink class="text-link" to="/services">View all services</NuxtLink>
+        <h1>Private coaching for clarity and change</h1>
+        <p class="hero__statement">Family constellations, NLP coaching and mindfulness sessions with Kristina Culka.</p>
+        <div class="hero__meta" aria-label="Practice details">
+          <span>London + online</span>
+          <span>Private 1:1</span>
+          <span>Three service paths</span>
         </div>
-        <p class="hero__copy">
-          Choose from family constellations, NLP coaching, or mindfulness coaching. Start with a 60-minute initial consultation to clarify what you need.
-        </p>
-        <div class="hero__offers" aria-label="Main offerings">
-          <NuxtLink v-for="service in services" :key="service.slug" :to="`/services/${service.slug}`">
-            {{ service.shortTitle }}
-          </NuxtLink>
+        <div class="hero__actions">
+          <NuxtLink class="button" to="/booking">Book initial consultation &middot; &pound;50</NuxtLink>
+          <NuxtLink class="text-link" to="/services">View all services</NuxtLink>
         </div>
       </div>
       <div class="hero__image">
-        <img src="/images/tild6135-3161-4062-b534-616330336562-photo_59272160547676.jpg" alt="Kristina Chulka in a library" />
+        <img :src="sectionImages.hero" alt="Kristina Culka providing a private coaching consultation in a calm London practice room" />
         <div class="hero__note">
           <span>Initial consultation</span>
-          <strong>£90</strong>
-          <p>60 minutes to clarify the request and choose the right format.</p>
+          <strong>£50</strong>
+          <p>30 minutes to clarify the request and choose the right format.</p>
         </div>
+      </div>
+    </section>
+
+    <section class="service-compass section" aria-labelledby="service-compass-title">
+      <div class="service-compass__intro">
+        <p class="eyebrow">Service compass</p>
+        <h2 id="service-compass-title">Choose the path closest to what you need today</h2>
+        <p>
+          If you already know the format, start there. If not, the initial consultation is a simple way to choose together.
+        </p>
+      </div>
+      <div class="service-compass__layout">
+        <div class="service-compass__tabs" role="tablist" aria-label="Service options">
+          <button
+            v-for="(service, index) in services"
+            :id="`hero-service-tab-${service.slug}`"
+            :key="service.slug"
+            class="service-compass__tab"
+            :class="{ 'is-active': activeHeroService?.slug === service.slug }"
+            type="button"
+            role="tab"
+            :aria-controls="`hero-service-panel-${service.slug}`"
+            :aria-selected="activeHeroService?.slug === service.slug"
+            @click="setHeroService(service.slug)"
+            @focus="setHeroService(service.slug)"
+            @mouseenter="setHeroService(service.slug)"
+            @keydown="handleHeroServiceKeydown($event, index)"
+          >
+            <span>{{ String(index + 1).padStart(2, '0') }}</span>
+            <strong>{{ service.shortTitle }}</strong>
+            <small>{{ service.duration }}</small>
+          </button>
+        </div>
+        <article
+          v-if="activeHeroService"
+          :id="`hero-service-panel-${activeHeroService.slug}`"
+          class="service-compass__panel"
+          role="tabpanel"
+          :aria-labelledby="`hero-service-tab-${activeHeroService.slug}`"
+        >
+          <div class="service-compass__panel-copy">
+            <span>{{ activeHeroService.eyebrow }}</span>
+            <h3>{{ activeHeroService.title }}</h3>
+            <p>{{ activeHeroService.promise }}</p>
+          </div>
+          <div class="service-compass__details" aria-label="Service focus">
+            <span v-for="detail in activeHeroService.details" :key="detail">{{ detail }}</span>
+          </div>
+          <div class="service-compass__meta">
+            <strong>{{ activeHeroService.price }}</strong>
+            <span>{{ activeHeroService.duration }}</span>
+          </div>
+          <div class="service-compass__actions">
+            <NuxtLink class="text-link" :to="`/services/${activeHeroService.slug}`">Explore service</NuxtLink>
+            <NuxtLink class="button button--small" :to="`/booking?service=${activeHeroService.slug}`">Book this path</NuxtLink>
+          </div>
+        </article>
       </div>
     </section>
 
     <section class="section foundation" id="approach">
       <div class="section-heading">
-        <p class="eyebrow">What I rely on when working with people</p>
-        <h2>Path and Inner Bearings</h2>
+        <p class="eyebrow">Principles</p>
+        <h2>How I work</h2>
       </div>
       <div class="foundation__layout">
-        <img src="/images/tild3233-3233-4563-a130-323032383062-noroot.png" alt="Kristina Chulka standing outside The Law Society in London" />
+        <img :src="sectionImages.approach" alt="Kristina Culka outside The Law Society in London" />
         <div class="foundation__items">
           <article v-for="pillar in approachPillars" :key="pillar.title" class="text-block">
             <h3>{{ pillar.title }}</h3>
@@ -171,27 +281,30 @@ const socialImages = [
 
     <section class="section method">
       <p class="asterisk">*</p>
+      <div class="method__visual">
+        <img :src="sectionImages.method" alt="A systemic constellation mapping session with wooden figures" />
+      </div>
       <div class="method__grid">
         <article v-for="card in methodCards" :key="card.title" class="text-block text-block--large">
           <h3>{{ card.title }}</h3>
           <p>{{ card.copy }}</p>
         </article>
       </div>
-      <h2>Approach and Method</h2>
+      <h2>Systemic work, simply</h2>
     </section>
 
     <section class="section service-map" aria-labelledby="service-map-title">
       <div class="section-heading">
-        <p class="eyebrow">Ways of working</p>
-        <h2 id="service-map-title">Three Directions, One Practice</h2>
+        <p class="eyebrow">Choose by need</p>
+        <h2 id="service-map-title">Three clear service paths</h2>
       </div>
       <div class="service-map__grid">
         <article v-for="service in services" :key="service.slug" class="service-family">
           <span>{{ service.eyebrow }}</span>
           <h3>{{ service.title }}</h3>
-          <p>{{ service.summary }}</p>
+          <p>{{ service.promise }}</p>
           <ul>
-            <li v-for="area in service.idealFor" :key="area">{{ area }}</li>
+            <li v-for="detail in service.details" :key="detail">{{ detail }}</li>
           </ul>
           <NuxtLink class="text-link" :to="`/services/${service.slug}`">Explore {{ service.shortTitle }}</NuxtLink>
         </article>
@@ -200,14 +313,16 @@ const socialImages = [
 
     <section class="presence">
       <div class="presence__image">
-        <img src="/images/tild6135-3161-4062-b534-616330336562-photo_59272160547676.jpg" alt="Kristina Chulka in a library" />
+        <img :src="sectionImages.presence" alt="Kristina Culka in a quiet library setting" />
       </div>
       <div class="presence__content">
         <p class="asterisk">*</p>
-        <h2>Here, the method is not the main thing. The quality of presence is.</h2>
+        <h2>Presence matters more than method.</h2>
         <div class="reason-list">
           <h3>Why people choose me</h3>
-          <p v-for="reason in reasons" :key="reason">{{ reason }}</p>
+          <ul>
+            <li v-for="reason in reasons" :key="reason">{{ reason }}</li>
+          </ul>
         </div>
       </div>
     </section>
@@ -216,11 +331,11 @@ const socialImages = [
       <div class="section-heading section-heading--split">
         <div>
           <p class="asterisk">*</p>
-          <h2>Who This Work Is For</h2>
+          <h2>Who this work is for</h2>
         </div>
         <div class="not-fit">
           <h3>Who this work is not for</h3>
-          <p>It is not for those looking for quick fixes or wanting to shift responsibility. The work is possible only with involvement and a mature client position.</p>
+          <p>Not quick fixes. Not shifting responsibility. The work needs involvement and maturity.</p>
         </div>
       </div>
       <div class="audience__grid">
@@ -231,16 +346,21 @@ const socialImages = [
           </ul>
         </article>
       </div>
-      <NuxtLink class="button" to="/booking">Book</NuxtLink>
+      <div class="audience__visual">
+        <img :src="sectionImages.audience" alt="A focused private coaching conversation for clarity and confidence" />
+      </div>
+      <div class="section-actions">
+        <NuxtLink class="button" to="/booking">Book consultation</NuxtLink>
+      </div>
     </section>
 
     <section class="section shifts">
       <div class="shifts__intro">
         <p class="asterisk">*</p>
         <p>
-          The work does not lead to correction, but to inner shifts that gradually appear in external life.
+          The goal is not correction. It is a calmer inner position that changes real choices.
         </p>
-        <span>In the process of work, what changes is:</span>
+        <span>What tends to shift:</span>
       </div>
       <div class="shifts__grid">
         <article v-for="(shift, index) in shifts" :key="shift">
@@ -248,20 +368,22 @@ const socialImages = [
           <p>{{ shift }}</p>
         </article>
       </div>
+      <div class="shifts__visual">
+        <img :src="sectionImages.shifts" alt="Kristina Culka and a client in a calm reflective moment after a session" />
+      </div>
       <h2>
-        This is not about external strategies,<br />
-        but about the state of the person<br />
-        standing behind them.
+        The work starts inside.<br />
+        The effect shows up in life.
       </h2>
     </section>
 
     <section class="section testimonials" id="stories">
       <div class="section-heading">
         <p class="asterisk">*</p>
-        <h2>Reviews and Living Stories</h2>
+        <h2>Client stories</h2>
       </div>
       <div class="testimonial-track">
-        <article v-for="story in testimonials" :key="story.quote" class="testimonial">
+        <article v-for="story in featuredTestimonials" :key="story.quote" class="testimonial">
           <h3>"{{ story.quote }}"</h3>
           <p>{{ story.text }}</p>
         </article>
@@ -270,9 +392,9 @@ const socialImages = [
 
     <section class="section services" id="services">
       <div class="section-heading">
-        <h2>Services</h2>
+        <h2>Quick service guide</h2>
         <p class="section-intro">
-          Each service now has its own page with details, pricing context, and a route into booking.
+          Scan the format, time, and first step before choosing a page.
         </p>
       </div>
       <div class="services__list">
@@ -280,30 +402,31 @@ const socialImages = [
           <span>{{ String(index + 1).padStart(3, '0') }}</span>
           <div>
             <h3>{{ service.title }}</h3>
-            <p>{{ service.intro }}</p>
+            <p>{{ service.promise }}</p>
             <p class="service__meta">{{ service.duration }} · {{ service.price }}</p>
             <NuxtLink class="button button--small" :to="`/services/${service.slug}`">View service</NuxtLink>
           </div>
         </article>
       </div>
-      <NuxtLink class="button" to="/services">All services</NuxtLink>
+      <div class="section-actions">
+        <NuxtLink class="button" to="/services">All services</NuxtLink>
+      </div>
     </section>
 
     <section class="section social">
       <div class="social__copy">
         <p class="asterisk">*</p>
         <p>
-          Part of my life and professional path is connected with projects that do not have a commercial goal.
+          Social and charity projects are part of the same worldview: confidence, inner support, and healthy relationships.
         </p>
-        <p>
-          I participate in charitable and social initiatives in London, including leadership programs for teenagers. It is important to me to work with the future: with the formation of confidence, inner support, and the ability to build healthy relationships with oneself and the world.
-        </p>
-        <p>
-          I see this not as a separate activity, but as a natural continuation of the responsibility and worldview on which my work with people is built.
-        </p>
+        <ul class="chip-list chip-list--light">
+          <li>Teen leadership</li>
+          <li>London initiatives</li>
+          <li>Community support</li>
+        </ul>
       </div>
       <div class="social__title">
-        <h2>Social Projects and Charity</h2>
+        <h2>Social projects and charity</h2>
       </div>
       <div class="social__images">
         <img v-for="image in socialImages" :key="image" :src="image" alt="Social and charity project photo" />
@@ -345,7 +468,7 @@ const socialImages = [
         <h2>Contacts</h2>
         <p><strong>Email:</strong> <a href="mailto:Kristina.culka@gmail.com">Kristina.culka@gmail.com</a></p>
         <p><strong>Phone:</strong> <a href="tel:+447502500989">+44 75 0250 0989</a></p>
-        <NuxtLink class="button button--light" to="/booking">Book a Consultation</NuxtLink>
+        <NuxtLink class="button button--light" to="/booking">Book a consultation</NuxtLink>
       </aside>
     </section>
   </main>
