@@ -43,7 +43,7 @@ const closingCta = computed(() => {
     return {
       eyebrow: activeService.value.eyebrow,
       title: `Ready for ${activeService.value.shortTitle}?`,
-      copy: 'Book the full service directly, or choose a short consultation if you want to confirm the fit first.',
+      copy: 'Book the full service directly, or start with a discovery session if you want to map the request first.',
       primary: {
         label: 'Book this service',
         to: `/booking?service=${activeService.value.slug}`,
@@ -58,10 +58,10 @@ const closingCta = computed(() => {
   if (route.path === '/services') {
     return {
       eyebrow: 'Next step',
-      title: 'Ready to choose the right format?',
-      copy: 'Book a specific service directly, or use the short consultation to choose between systemic work, NLP coaching, and mindfulness.',
+      title: 'Ready to map the right next step?',
+      copy: 'Book a specific service directly, or use the discovery session to understand the request before choosing between systemic work, NLP coaching, and mindfulness.',
       primary: {
-        label: 'Book initial consultation',
+        label: 'Book discovery session',
         to: '/booking',
       },
       secondary: {
@@ -75,7 +75,7 @@ const closingCta = computed(() => {
     return {
       eyebrow: 'Before you send',
       title: 'Not sure which service to choose?',
-      copy: 'Request a consultation. Kristina will confirm the right format personally.',
+      copy: 'Request a discovery session. Kristina will review the request and recommend the right next step personally.',
       primary: {
         label: 'View services',
         to: '/services',
@@ -90,9 +90,9 @@ const closingCta = computed(() => {
   return {
     eyebrow: 'Begin here',
     title: 'Ready to find the right support?',
-    copy: 'Compare the services or book a consultation to choose the right format.',
+    copy: 'Compare the services or book a discovery session to understand the request and choose the right next step.',
     primary: {
-      label: 'Book consultation',
+      label: 'Book discovery',
       to: '/booking',
     },
     secondary: {
@@ -116,7 +116,7 @@ const closingCta = computed(() => {
     </nav>
     <div class="desktop-header-actions" aria-label="Quick actions">
       <a class="header-call-link" href="tel:+447502500989">Call</a>
-      <NuxtLink class="header-book-link" to="/booking">Book consultation</NuxtLink>
+      <NuxtLink class="header-book-link" to="/booking">Book discovery</NuxtLink>
     </div>
     <div class="mobile-header-actions" aria-label="Mobile quick actions">
       <NuxtLink class="mobile-book-link" to="/booking">Book</NuxtLink>
@@ -131,8 +131,7 @@ const closingCta = computed(() => {
         aria-label="Open navigation menu"
         @click="mobileMenuOpen = true"
       >
-        <span></span>
-        <span></span>
+        Menu
       </button>
     </div>
   </header>
@@ -155,7 +154,7 @@ const closingCta = computed(() => {
           <NuxtLink to="/booking" @click="closeMobileMenu">Booking</NuxtLink>
         </nav>
         <div class="mobile-menu__actions">
-          <NuxtLink class="button button--light" to="/booking" @click="closeMobileMenu">Book consultation</NuxtLink>
+          <NuxtLink class="button button--light" to="/booking" @click="closeMobileMenu">Book discovery</NuxtLink>
           <a class="mobile-menu__call" href="tel:+447502500989">Call +44 75 0250 0989</a>
         </div>
       </aside>

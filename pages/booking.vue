@@ -1,18 +1,18 @@
 <script setup lang="ts">
-import { bookingTimes, initialConsultation, services } from '~/data/services'
+import { bookingTimes, discoverySession, services } from '~/data/services'
 
 const route = useRoute()
 const router = useRouter()
 
 const bookingOptions = computed(() => [
   {
-    slug: initialConsultation.slug,
-    title: initialConsultation.title,
-    shortTitle: initialConsultation.shortTitle,
-    price: initialConsultation.price,
-    duration: initialConsultation.duration,
-    note: initialConsultation.note,
-    type: 'Consultation',
+    slug: discoverySession.slug,
+    title: discoverySession.title,
+    shortTitle: discoverySession.shortTitle,
+    price: discoverySession.price,
+    duration: discoverySession.duration,
+    note: discoverySession.note,
+    type: 'Discovery',
   },
   ...services.map((service) => ({
     slug: service.slug,
@@ -26,9 +26,9 @@ const bookingOptions = computed(() => [
 ])
 
 const getBookingSlug = (service: unknown) => {
-  const slug = String(service ?? initialConsultation.slug)
+  const slug = String(service ?? discoverySession.slug)
 
-  return bookingOptions.value.some((option) => option.slug === slug) ? slug : initialConsultation.slug
+  return bookingOptions.value.some((option) => option.slug === slug) ? slug : discoverySession.slug
 }
 
 const selectedBookingSlug = ref(getBookingSlug(route.query.service))
@@ -89,7 +89,7 @@ const nextActionLabel = computed(() => {
 const selectedDateLabel = computed(() => form.preferredDate || 'Add date')
 const selectedTimeLabel = computed(() => form.preferredTime || 'Add time')
 const selectedGuestLabel = computed(() => form.name.trim() || 'Add name')
-const requestPreview = computed(() => form.request.trim() || 'Kristina will confirm details personally after you send the request.')
+const requestPreview = computed(() => form.request.trim() || 'Kristina will review the request personally after you send it.')
 
 const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
@@ -205,7 +205,7 @@ useHead({
     {
       name: 'description',
       content:
-        'Book an initial consultation or a full private service with Kristina Culka.',
+        'Book a discovery session or a full private service with Kristina Culka.',
     },
   ],
 })
@@ -227,10 +227,9 @@ useHead({
           <div class="booking-wizard__main">
             <div class="booking-wizard__header">
               <div>
-                <span>Step {{ currentStep + 1 }} of {{ wizardSteps.length }}</span>
+                <span>Booking progress</span>
                 <strong>{{ selectedStepLabel }}</strong>
               </div>
-              <p>{{ Math.round(((currentStep + 1) / wizardSteps.length) * 100) }}% complete</p>
             </div>
 
             <div class="booking-wizard__progress" aria-hidden="true">
@@ -243,7 +242,6 @@ useHead({
                 :key="step"
                 :class="{ 'is-active': index === currentStep, 'is-complete': index < currentStep }"
               >
-                <span>{{ index + 1 }}</span>
                 {{ step }}
               </li>
             </ol>
@@ -256,8 +254,8 @@ useHead({
             <input type="hidden" name="preferred-time" :value="form.preferredTime" />
 
             <section v-show="currentStep === 0" class="booking-question" aria-live="polite">
-              <p class="eyebrow">Choose your session</p>
-              <h2>Start with the support that fits best.</h2>
+              <p class="eyebrow">Choose your first step</p>
+              <h2>Start with discovery or choose a full service.</h2>
               <p v-if="serviceWasPreselected" class="booking-question__hint">
                 This was pre-selected from the service page. You can keep it or choose another option.
               </p>
@@ -358,7 +356,7 @@ useHead({
 
             <section v-show="currentStep === 5" class="booking-question">
               <p class="eyebrow">Review request</p>
-              <h2>Send this booking request?</h2>
+              <h2>Send this session request?</h2>
               <div class="booking-summary" aria-live="polite">
                 <span>{{ selectedBooking.type }}</span>
                 <strong>{{ selectedBooking.title }}</strong>
@@ -373,7 +371,7 @@ useHead({
 
           <aside class="booking-reservation" aria-label="Booking summary">
             <figure class="booking-reservation__media">
-              <img src="/images/generated/kristina-online-session.png" alt="Kristina Culka providing an online coaching session from a warm private practice room" />
+              <img src="/images/kristina/online-reflective-room.jpeg" alt="Kristina Culka seated in a calm private room for reflective coaching work" />
             </figure>
             <div class="booking-reservation__copy">
               <span>{{ selectedBooking.type }}</span>
@@ -418,7 +416,7 @@ useHead({
           >
             {{ nextActionLabel }}
           </button>
-          <button v-else class="button" type="submit">Request booking</button>
+          <button v-else class="button" type="submit">Request session</button>
         </div>
       </form>
     </section>

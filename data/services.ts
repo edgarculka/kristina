@@ -16,19 +16,20 @@ export type ServiceItem = {
   imageAlt: string
   promise: string
   idealFor: string[]
+  benefits: string[]
   details: string[]
   groups: ServiceGroup[]
   outcomes: string[]
   closing: string
 }
 
-export const initialConsultation = {
-  slug: 'consultation',
-  title: 'Initial consultation',
-  shortTitle: 'Consultation',
+export const discoverySession = {
+  slug: 'discovery',
+  title: 'Discovery session',
+  shortTitle: 'Discovery',
   price: '£50',
   duration: '30 minutes',
-  note: 'A shorter, lower-cost first meeting to clarify the request and choose the right format.',
+  note: 'A focused diagnostic first meeting to map the request and choose the right next step.',
 }
 
 export const bookingTimes = ['10:00', '12:00', '14:00', '16:00', '18:00']
@@ -84,10 +85,11 @@ export const services: ServiceItem[] = [
     ],
     closing:
       'A constellation supports calmer decisions by making the hidden structure visible.',
-    image: '/images/generated/kristina-family-constellations.png',
-    imageAlt: 'Kristina Culka guiding a private systemic constellation session with wooden figures on a consultation table',
+    image: '/images/kristina/family-constellations-stage.jpeg',
+    imageAlt: 'Kristina Culka speaking about family systemic constellations from a stage',
     promise: 'A quiet space to see what has been influencing the system underneath the visible problem.',
-    details: ['Private 1:1 format', 'Systemic lens', 'Deep request work'],
+    benefits: ['Hidden patterns become clearer', 'Calmer decisions', 'Money and family insight'],
+    details: ['1:1 or group sessions', 'Online or in London', 'Other countries by enquiry'],
   },
   {
     slug: 'nlp-coaching',
@@ -136,9 +138,10 @@ export const services: ServiceItem[] = [
     ],
     closing:
       'This format is practical: confidence, regulation, and movement beyond old limits.',
-    image: '/images/generated/kristina-nlp-coaching.png',
-    imageAlt: 'Kristina Culka providing private NLP coaching with a notebook and coaching cards',
+    image: '/images/kristina/nlp-confidence-lecture.jpeg',
+    imageAlt: 'Kristina Culka teaching confidence and communication from a lecture room podium',
     promise: 'Practical tools for confidence, attention, and new inner responses in real situations.',
+    benefits: ['Confidence under pressure', 'Clearer thinking', 'New responses'],
     details: ['Applied coaching', 'Confidence work', 'Clear-mind tools'],
   },
   {
@@ -185,9 +188,10 @@ export const services: ServiceItem[] = [
     ],
     closing:
       'This format gives softness, structure, and a calmer relationship with yourself.',
-    image: '/images/generated/kristina-mindfulness-coaching.png',
-    imageAlt: 'Kristina Culka guiding a private mindfulness coaching session in a calm room',
+    image: '/images/kristina/mindfulness-books.jpeg',
+    imageAlt: 'Kristina Culka holding mindfulness and inner peace books for reflective practice',
     promise: 'Gentle structure for returning to the body, calming the mind, and choosing aligned next steps.',
+    benefits: ['Calmer body and mind', 'Stable attention', 'Aligned next steps'],
     details: ['Mindful living', 'Meditation', 'Creative integration'],
   },
 ]

@@ -23,8 +23,8 @@ useHead(() => ({
         <h1>{{ service.title }}</h1>
         <p>{{ service.promise }}</p>
         <div class="page-hero__actions">
-          <NuxtLink class="button button--light" :to="`/booking?service=${service.slug}`">Book this service</NuxtLink>
-          <NuxtLink class="text-link text-link--light" to="/services">Back to services</NuxtLink>
+          <NuxtLink class="button" :to="`/booking?service=${service.slug}`">Book this service</NuxtLink>
+          <NuxtLink class="text-link" to="/services">Back to services</NuxtLink>
         </div>
       </div>
       <div class="service-detail-hero__image">
@@ -39,14 +39,12 @@ useHead(() => ({
         <p>{{ service.duration }}</p>
       </div>
       <article v-for="detail in service.details" :key="detail" class="snapshot-card">
-        <span>*</span>
         <p>{{ detail }}</p>
       </article>
     </section>
 
     <section class="section service-page service-page--editorial">
       <div class="service-page__intro">
-        <p class="asterisk">*</p>
         <h2>Best fit</h2>
         <p>{{ service.intro }}</p>
         <ul class="chip-list">
@@ -66,12 +64,11 @@ useHead(() => ({
 
     <section class="section outcomes outcomes--visual">
       <div>
-        <p class="asterisk">*</p>
         <h2>What changes</h2>
         <p>{{ service.closing }}</p>
       </div>
       <figure class="outcomes__image">
-        <img src="/images/generated/kristina-outcomes-clarity.png" alt="Kristina Culka and a client in a calm reflective moment after a private session" />
+        <img src="/images/kristina/outcomes-outdoor-portrait.jpeg" alt="Kristina Culka in a calm outdoor portrait representing clarity after reflective work" />
       </figure>
       <ul>
         <li v-for="outcome in service.outcomes" :key="outcome">{{ outcome }}</li>

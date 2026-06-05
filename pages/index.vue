@@ -1,51 +1,6 @@
 <script setup lang="ts">
 import { services } from '~/data/services'
 
-const activeHeroServiceSlug = ref(services[0]?.slug ?? '')
-const activeHeroService = computed(() => services.find((service) => service.slug === activeHeroServiceSlug.value) ?? services[0])
-
-const setHeroService = (slug: string) => {
-  activeHeroServiceSlug.value = slug
-}
-
-const setHeroServiceByIndex = (index: number) => {
-  const nextService = services[index]
-
-  if (nextService) {
-    activeHeroServiceSlug.value = nextService.slug
-  }
-}
-
-const handleHeroServiceKeydown = (event: KeyboardEvent, index: number) => {
-  const keys = ['ArrowRight', 'ArrowDown', 'ArrowLeft', 'ArrowUp', 'Home', 'End']
-
-  if (!keys.includes(event.key)) {
-    return
-  }
-
-  event.preventDefault()
-
-  const lastIndex = services.length - 1
-  const nextIndexMap: Record<string, number> = {
-    ArrowRight: index === lastIndex ? 0 : index + 1,
-    ArrowDown: index === lastIndex ? 0 : index + 1,
-    ArrowLeft: index === 0 ? lastIndex : index - 1,
-    ArrowUp: index === 0 ? lastIndex : index - 1,
-    Home: 0,
-    End: lastIndex,
-  }
-  const nextIndex = nextIndexMap[event.key]
-
-  setHeroServiceByIndex(nextIndex)
-
-  const tabList = event.currentTarget instanceof HTMLElement ? event.currentTarget.parentElement : null
-  const nextTab = tabList?.children[nextIndex]
-
-  if (nextTab instanceof HTMLElement) {
-    nextTab.focus()
-  }
-}
-
 const approachPillars = [
   {
     title: 'Work',
@@ -85,14 +40,6 @@ const methodCards = [
     copy:
       'No rescuing, pressure, or decisions made for you. The work supports clear choice.',
   },
-]
-
-const reasons = [
-  'Private, confidential, and low-volume',
-  'Useful during growth, pressure, and transitions',
-  'Strong fit for leaders and entrepreneurs',
-  'Connects inner clarity with decisions and scale',
-  'Focused on stability, support, and responsibility',
 ]
 
 const audienceGroups = [
@@ -163,19 +110,82 @@ const testimonials = [
 const featuredTestimonials = testimonials.slice(0, 4)
 
 const sectionImages = {
-  hero: '/images/generated/kristina-hero-consultation.png',
-  approach: '/images/tild3233-3233-4563-a130-323032383062-noroot.png',
-  method: '/images/generated/kristina-family-constellations.png',
-  presence: '/images/tild6135-3161-4062-b534-616330336562-photo_59272160547676.jpg',
-  audience: '/images/generated/kristina-nlp-coaching.png',
-  shifts: '/images/generated/kristina-outcomes-clarity.png',
+  hero: '/images/kristina/hero-outdoor-portrait.jpeg',
+  approach: '/images/kristina/approach-calm-consultation.jpeg',
+  method: '/images/kristina/family-constellations-stage.jpeg',
+  audience: '/images/kristina/nlp-confidence-lecture.jpeg',
+  shifts: '/images/kristina/outcomes-outdoor-portrait.jpeg',
 }
 
 const socialImages = [
-  '/images/generated/social-teen-leadership.png',
-  '/images/tild6466-6339-4638-a265-353239333034-noroot.png',
-  '/images/tild6466-3862-4431-b932-356264333062-Group_65.png',
-  '/images/tild3566-3862-4538-b636-396363663864-photo_57848855458623.jpg',
+  {
+    src: '/images/kristina/charity-daily-reflection-workshop.jpeg',
+    alt: 'Kristina Culka leading a daily reflection workshop for a charity leadership programme',
+  },
+  {
+    src: '/images/kristina/charity-group-selfie.jpeg',
+    alt: 'Kristina Culka with young people and programme leaders at a community leadership event',
+  },
+  {
+    src: '/images/kristina/charity-award-projects.jpeg',
+    alt: 'Kristina Culka receiving recognition at a charity project event',
+  },
+  {
+    src: '/images/kristina/charity-law-library-session.jpeg',
+    alt: 'Kristina Culka presenting in a law library for a charity leadership development programme',
+  },
+  {
+    src: '/images/kristina/charity-foundation-event-group.jpeg',
+    alt: 'Sharifa Ibrahim Foundation charity event group photo with Kristina Culka',
+  },
+  {
+    src: '/images/kristina/charity-conference-presentation.jpeg',
+    alt: 'Kristina Culka speaking at a conference presentation connected with charity work',
+  },
+  {
+    src: '/images/kristina/charity-oxford-union-podium.jpeg',
+    alt: 'Kristina Culka speaking at the Oxford Union podium during a charity-related event',
+  },
+  {
+    src: '/images/kristina/charity-certified-life-coach-stage.jpeg',
+    alt: 'Kristina Culka speaking on stage as a certified life coach and systemic constellations facilitator',
+  },
+  {
+    src: '/images/kristina/charity-microphone-training.jpeg',
+    alt: 'Kristina Culka speaking with a microphone during a charity training session',
+  },
+  {
+    src: '/images/kristina/charity-formal-delegation.jpeg',
+    alt: 'Kristina Culka with a formal delegation connected to foundation and community work',
+  },
+  {
+    src: '/images/kristina/charity-foundation-portrait.jpeg',
+    alt: 'Kristina Culka with a foundation representative during charity work',
+  },
+  {
+    src: '/images/kristina/charity-certificate-selfie.jpeg',
+    alt: 'Kristina Culka with participants holding certificates after a charity programme',
+  },
+  {
+    src: '/images/kristina/charity-partner-portrait.jpeg',
+    alt: 'Kristina Culka with a community partner at a charity event',
+  },
+  {
+    src: '/images/kristina/charity-hall-speaking.jpeg',
+    alt: 'Kristina Culka speaking to an audience at a community charity event',
+  },
+  {
+    src: '/images/kristina/charity-podium-close.jpeg',
+    alt: 'Kristina Culka speaking from a podium during a charity conference',
+  },
+  {
+    src: '/images/kristina/charity-university-islamabad.jpeg',
+    alt: 'Kristina Culka at Ibadat International University Islamabad for a youth leadership programme',
+  },
+  {
+    src: '/images/kristina/charity-uk-flag-podium.jpeg',
+    alt: 'Kristina Culka speaking at a charity event with a UK flag behind the podium',
+  },
 ]
 </script>
 
@@ -188,21 +198,22 @@ const socialImages = [
         <p class="hero__statement">Family constellations, NLP coaching and mindfulness sessions with Kristina Culka.</p>
         <div class="hero__meta" aria-label="Practice details">
           <span>London + online</span>
-          <span>Private 1:1</span>
+          <span>1:1 or groups</span>
           <span>Three service paths</span>
         </div>
         <div class="hero__actions">
-          <NuxtLink class="button" to="/booking">Book initial consultation &middot; &pound;50</NuxtLink>
+          <NuxtLink class="button" to="/booking">Book discovery session &middot; &pound;50</NuxtLink>
           <NuxtLink class="text-link" to="/services">View all services</NuxtLink>
         </div>
       </div>
       <div class="hero__image">
-        <img :src="sectionImages.hero" alt="Kristina Culka providing a private coaching consultation in a calm London practice room" />
-        <div class="hero__note">
-          <span>Initial consultation</span>
+        <img :src="sectionImages.hero" alt="Kristina Culka seated outside in London for a calm professional portrait" />
+        <NuxtLink class="hero__note" to="/booking" aria-label="Book a discovery session for £50">
+          <span>Discovery session</span>
           <strong>£50</strong>
-          <p>30 minutes to clarify the request and choose the right format.</p>
-        </div>
+          <p>30 minutes to map the request, diagnose the starting point, and choose the next step.</p>
+          <em>Book discovery</em>
+        </NuxtLink>
       </div>
     </section>
 
@@ -211,53 +222,30 @@ const socialImages = [
         <p class="eyebrow">Service compass</p>
         <h2 id="service-compass-title">Choose the path closest to what you need today</h2>
         <p>
-          If you already know the format, start there. If not, the initial consultation is a simple way to choose together.
+          If you already know the format, start there. If not, the discovery session helps map the request before choosing together.
         </p>
       </div>
       <div class="service-compass__layout">
-        <div class="service-compass__tabs" role="tablist" aria-label="Service options">
-          <button
-            v-for="(service, index) in services"
-            :id="`hero-service-tab-${service.slug}`"
-            :key="service.slug"
-            class="service-compass__tab"
-            :class="{ 'is-active': activeHeroService?.slug === service.slug }"
-            type="button"
-            role="tab"
-            :aria-controls="`hero-service-panel-${service.slug}`"
-            :aria-selected="activeHeroService?.slug === service.slug"
-            @click="setHeroService(service.slug)"
-            @focus="setHeroService(service.slug)"
-            @mouseenter="setHeroService(service.slug)"
-            @keydown="handleHeroServiceKeydown($event, index)"
-          >
-            <span>{{ String(index + 1).padStart(2, '0') }}</span>
-            <strong>{{ service.shortTitle }}</strong>
-            <small>{{ service.duration }}</small>
-          </button>
-        </div>
         <article
-          v-if="activeHeroService"
-          :id="`hero-service-panel-${activeHeroService.slug}`"
+          v-for="service in services"
+          :key="service.slug"
           class="service-compass__panel"
-          role="tabpanel"
-          :aria-labelledby="`hero-service-tab-${activeHeroService.slug}`"
         >
           <div class="service-compass__panel-copy">
-            <span>{{ activeHeroService.eyebrow }}</span>
-            <h3>{{ activeHeroService.title }}</h3>
-            <p>{{ activeHeroService.promise }}</p>
+            <span>{{ service.eyebrow }}</span>
+            <h3>{{ service.title }}</h3>
+            <p>{{ service.promise }}</p>
           </div>
-          <div class="service-compass__details" aria-label="Service focus">
-            <span v-for="detail in activeHeroService.details" :key="detail">{{ detail }}</span>
+          <div class="service-compass__details" aria-label="Service benefits">
+            <span v-for="benefit in service.benefits" :key="benefit">{{ benefit }}</span>
           </div>
           <div class="service-compass__meta">
-            <strong>{{ activeHeroService.price }}</strong>
-            <span>{{ activeHeroService.duration }}</span>
+            <strong>{{ service.price }}</strong>
+            <span>{{ service.duration }}</span>
           </div>
           <div class="service-compass__actions">
-            <NuxtLink class="text-link" :to="`/services/${activeHeroService.slug}`">Explore service</NuxtLink>
-            <NuxtLink class="button button--small" :to="`/booking?service=${activeHeroService.slug}`">Book this path</NuxtLink>
+            <NuxtLink class="text-link" :to="`/services/${service.slug}`">Explore service</NuxtLink>
+            <NuxtLink class="button button--small" :to="`/booking?service=${service.slug}`">Book this path</NuxtLink>
           </div>
         </article>
       </div>
@@ -269,7 +257,7 @@ const socialImages = [
         <h2>How I work</h2>
       </div>
       <div class="foundation__layout">
-        <img :src="sectionImages.approach" alt="Kristina Culka outside The Law Society in London" />
+        <img :src="sectionImages.approach" alt="Kristina Culka seated in a calm private room for reflective work" />
         <div class="foundation__items">
           <article v-for="pillar in approachPillars" :key="pillar.title" class="text-block">
             <h3>{{ pillar.title }}</h3>
@@ -280,9 +268,8 @@ const socialImages = [
     </section>
 
     <section class="section method">
-      <p class="asterisk">*</p>
       <div class="method__visual">
-        <img :src="sectionImages.method" alt="A systemic constellation mapping session with wooden figures" />
+        <img :src="sectionImages.method" alt="Kristina Culka speaking about family systemic constellations on stage" />
       </div>
       <div class="method__grid">
         <article v-for="card in methodCards" :key="card.title" class="text-block text-block--large">
@@ -304,33 +291,16 @@ const socialImages = [
           <h3>{{ service.title }}</h3>
           <p>{{ service.promise }}</p>
           <ul>
-            <li v-for="detail in service.details" :key="detail">{{ detail }}</li>
+            <li v-for="benefit in service.benefits" :key="benefit">{{ benefit }}</li>
           </ul>
           <NuxtLink class="text-link" :to="`/services/${service.slug}`">Explore {{ service.shortTitle }}</NuxtLink>
         </article>
       </div>
     </section>
 
-    <section class="presence">
-      <div class="presence__image">
-        <img :src="sectionImages.presence" alt="Kristina Culka in a quiet library setting" />
-      </div>
-      <div class="presence__content">
-        <p class="asterisk">*</p>
-        <h2>Presence matters more than method.</h2>
-        <div class="reason-list">
-          <h3>Why people choose me</h3>
-          <ul>
-            <li v-for="reason in reasons" :key="reason">{{ reason }}</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
     <section class="section audience" id="fit">
       <div class="section-heading section-heading--split">
         <div>
-          <p class="asterisk">*</p>
           <h2>Who this work is for</h2>
         </div>
         <div class="not-fit">
@@ -347,29 +317,29 @@ const socialImages = [
         </article>
       </div>
       <div class="audience__visual">
-        <img :src="sectionImages.audience" alt="A focused private coaching conversation for clarity and confidence" />
+        <img :src="sectionImages.audience" alt="Kristina Culka teaching confidence and clear communication in a lecture room" />
       </div>
       <div class="section-actions">
-        <NuxtLink class="button" to="/booking">Book consultation</NuxtLink>
+        <NuxtLink class="button" to="/booking">Book discovery</NuxtLink>
       </div>
     </section>
 
     <section class="section shifts">
       <div class="shifts__intro">
-        <p class="asterisk">*</p>
         <p>
           The goal is not correction. It is a calmer inner position that changes real choices.
         </p>
-        <span>What tends to shift:</span>
       </div>
-      <div class="shifts__grid">
-        <article v-for="(shift, index) in shifts" :key="shift">
-          <span>{{ String(index + 1).padStart(3, '0') }}.</span>
-          <p>{{ shift }}</p>
-        </article>
+      <div class="shifts__list">
+        <h3>What tends to shift</h3>
+        <div class="shifts__grid">
+          <article v-for="shift in shifts" :key="shift">
+            <p>{{ shift }}</p>
+          </article>
+        </div>
       </div>
       <div class="shifts__visual">
-        <img :src="sectionImages.shifts" alt="Kristina Culka and a client in a calm reflective moment after a session" />
+        <img :src="sectionImages.shifts" alt="Kristina Culka in a calm outdoor portrait after reflective work" />
       </div>
       <h2>
         The work starts inside.<br />
@@ -379,7 +349,6 @@ const socialImages = [
 
     <section class="section testimonials" id="stories">
       <div class="section-heading">
-        <p class="asterisk">*</p>
         <h2>Client stories</h2>
       </div>
       <div class="testimonial-track">
@@ -398,8 +367,7 @@ const socialImages = [
         </p>
       </div>
       <div class="services__list">
-        <article v-for="(service, index) in services" :key="service.title" class="service">
-          <span>{{ String(index + 1).padStart(3, '0') }}</span>
+        <article v-for="service in services" :key="service.title" class="service">
           <div>
             <h3>{{ service.title }}</h3>
             <p>{{ service.promise }}</p>
@@ -408,14 +376,10 @@ const socialImages = [
           </div>
         </article>
       </div>
-      <div class="section-actions">
-        <NuxtLink class="button" to="/services">All services</NuxtLink>
-      </div>
     </section>
 
     <section class="section social">
       <div class="social__copy">
-        <p class="asterisk">*</p>
         <p>
           Social and charity projects are part of the same worldview: confidence, inner support, and healthy relationships.
         </p>
@@ -428,48 +392,9 @@ const socialImages = [
       <div class="social__title">
         <h2>Social projects and charity</h2>
       </div>
-      <div class="social__images">
-        <img v-for="image in socialImages" :key="image" :src="image" alt="Social and charity project photo" />
+      <div class="social__images" aria-label="Charity and social project photo gallery">
+        <img v-for="image in socialImages" :key="image.src" :src="image.src" :alt="image.alt" />
       </div>
-    </section>
-
-    <section class="contact" id="contact">
-      <div class="contact__form">
-        <h2>Questions?</h2>
-        <p>Fill in the form and I will contact you shortly.</p>
-        <form action="mailto:Kristina.culka@gmail.com" method="post" enctype="text/plain">
-          <label>
-            <span>Email</span>
-            <input type="email" name="email" required />
-          </label>
-          <label>
-            <span>Name</span>
-            <input type="text" name="name" required />
-          </label>
-          <label>
-            <span>Preferred contact method</span>
-            <select name="contact-method">
-              <option>WhatsApp</option>
-              <option>Telegram</option>
-              <option>Phone</option>
-              <option>Email</option>
-            </select>
-          </label>
-          <label>
-            <span>Your question</span>
-            <textarea name="message" rows="5"></textarea>
-          </label>
-          <button class="button" type="submit">Send</button>
-          <NuxtLink class="text-link" to="/booking">Or book an initial consultation</NuxtLink>
-        </form>
-      </div>
-      <aside class="contact-panel">
-        <p class="asterisk">*</p>
-        <h2>Contacts</h2>
-        <p><strong>Email:</strong> <a href="mailto:Kristina.culka@gmail.com">Kristina.culka@gmail.com</a></p>
-        <p><strong>Phone:</strong> <a href="tel:+447502500989">+44 75 0250 0989</a></p>
-        <NuxtLink class="button button--light" to="/booking">Book a consultation</NuxtLink>
-      </aside>
     </section>
   </main>
 </template>
