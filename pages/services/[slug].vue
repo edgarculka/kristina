@@ -3,6 +3,7 @@ import { serviceBySlug } from '~/data/services'
 
 const route = useRoute()
 const service = computed(() => serviceBySlug[String(route.params.slug)])
+const assetUrl = (path: string) => `${useRuntimeConfig().app.baseURL}${path.replace(/^\//, '')}`
 
 useHead(() => ({
   title: service.value ? `${service.value.title} | Kristina Culka` : 'Service | Kristina Culka',
@@ -28,7 +29,7 @@ useHead(() => ({
         </div>
       </div>
       <div class="service-detail-hero__image">
-        <img :src="service.image" :alt="service.imageAlt" />
+        <img :src="assetUrl(service.image)" :alt="service.imageAlt" />
       </div>
     </section>
 
@@ -68,7 +69,7 @@ useHead(() => ({
         <p>{{ service.closing }}</p>
       </div>
       <figure class="outcomes__image">
-        <img src="/images/kristina/outcomes-outdoor-portrait.jpeg" alt="Kristina Culka in a calm outdoor portrait representing clarity after reflective work" />
+        <img :src="assetUrl('/images/kristina/outcomes-outdoor-portrait.jpeg')" alt="Kristina Culka in a calm outdoor portrait representing clarity after reflective work" />
       </figure>
       <ul>
         <li v-for="outcome in service.outcomes" :key="outcome">{{ outcome }}</li>

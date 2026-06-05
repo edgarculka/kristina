@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { services } from '~/data/services'
 
+const assetUrl = (path: string) => `${useRuntimeConfig().app.baseURL}${path.replace(/^\//, '')}`
+
 const additionalOfferings = [
   {
     title: 'Group sessions',
@@ -52,7 +54,7 @@ useHead({
     <section class="section service-directory">
       <article v-for="service in services" :key="service.slug" class="directory-card directory-card--visual">
         <div class="directory-card__image">
-          <img :src="service.image" :alt="service.imageAlt" />
+          <img :src="assetUrl(service.image)" :alt="service.imageAlt" />
         </div>
         <div class="directory-card__body">
           <span>{{ service.eyebrow }}</span>
@@ -110,7 +112,7 @@ useHead({
 
     <section class="section service-availability" aria-label="Availability">
       <figure class="service-availability__visual">
-        <img src="/images/kristina/online-reflective-room.jpeg" alt="Kristina Culka seated in a calm private room for reflective coaching work" />
+        <img :src="assetUrl('/images/kristina/online-reflective-room.jpeg')" alt="Kristina Culka seated in a calm private room for reflective coaching work" />
         <figcaption>Available in London and online.</figcaption>
       </figure>
     </section>

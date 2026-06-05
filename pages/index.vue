@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { services } from '~/data/services'
 
+const assetUrl = (path: string) => `${useRuntimeConfig().app.baseURL}${path.replace(/^\//, '')}`
+
 const approachPillars = [
   {
     title: 'Work',
@@ -207,7 +209,7 @@ const socialImages = [
         </div>
       </div>
       <div class="hero__image">
-        <img :src="sectionImages.hero" alt="Kristina Culka seated outside in London for a calm professional portrait" />
+        <img :src="assetUrl(sectionImages.hero)" alt="Kristina Culka seated outside in London for a calm professional portrait" />
         <NuxtLink class="hero__note" to="/booking" aria-label="Book a discovery session for £50">
           <span>Discovery session</span>
           <strong>£50</strong>
@@ -257,7 +259,7 @@ const socialImages = [
         <h2>How I work</h2>
       </div>
       <div class="foundation__layout">
-        <img :src="sectionImages.approach" alt="Kristina Culka seated in a calm private room for reflective work" />
+        <img :src="assetUrl(sectionImages.approach)" alt="Kristina Culka seated in a calm private room for reflective work" />
         <div class="foundation__items">
           <article v-for="pillar in approachPillars" :key="pillar.title" class="text-block">
             <h3>{{ pillar.title }}</h3>
@@ -269,7 +271,7 @@ const socialImages = [
 
     <section class="section method">
       <div class="method__visual">
-        <img :src="sectionImages.method" alt="Kristina Culka speaking about family systemic constellations on stage" />
+        <img :src="assetUrl(sectionImages.method)" alt="Kristina Culka speaking about family systemic constellations on stage" />
       </div>
       <div class="method__grid">
         <article v-for="card in methodCards" :key="card.title" class="text-block text-block--large">
@@ -317,7 +319,7 @@ const socialImages = [
         </article>
       </div>
       <div class="audience__visual">
-        <img :src="sectionImages.audience" alt="Kristina Culka teaching confidence and clear communication in a lecture room" />
+        <img :src="assetUrl(sectionImages.audience)" alt="Kristina Culka teaching confidence and clear communication in a lecture room" />
       </div>
       <div class="section-actions">
         <NuxtLink class="button" to="/booking">Book discovery</NuxtLink>
@@ -339,7 +341,7 @@ const socialImages = [
         </div>
       </div>
       <div class="shifts__visual">
-        <img :src="sectionImages.shifts" alt="Kristina Culka in a calm outdoor portrait after reflective work" />
+        <img :src="assetUrl(sectionImages.shifts)" alt="Kristina Culka in a calm outdoor portrait after reflective work" />
       </div>
       <h2>
         The work starts inside.<br />
@@ -393,7 +395,7 @@ const socialImages = [
         <h2>Social projects and charity</h2>
       </div>
       <div class="social__images" aria-label="Charity and social project photo gallery">
-        <img v-for="image in socialImages" :key="image.src" :src="image.src" :alt="image.alt" />
+        <img v-for="image in socialImages" :key="image.src" :src="assetUrl(image.src)" :alt="image.alt" />
       </div>
     </section>
   </main>

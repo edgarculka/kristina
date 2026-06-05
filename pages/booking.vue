@@ -3,6 +3,7 @@ import { bookingTimes, discoverySession, services } from '~/data/services'
 
 const route = useRoute()
 const router = useRouter()
+const assetUrl = (path: string) => `${useRuntimeConfig().app.baseURL}${path.replace(/^\//, '')}`
 
 const bookingOptions = computed(() => [
   {
@@ -371,7 +372,7 @@ useHead({
 
           <aside class="booking-reservation" aria-label="Booking summary">
             <figure class="booking-reservation__media">
-              <img src="/images/kristina/online-reflective-room.jpeg" alt="Kristina Culka seated in a calm private room for reflective coaching work" />
+              <img :src="assetUrl('/images/kristina/online-reflective-room.jpeg')" alt="Kristina Culka seated in a calm private room for reflective coaching work" />
             </figure>
             <div class="booking-reservation__copy">
               <span>{{ selectedBooking.type }}</span>
